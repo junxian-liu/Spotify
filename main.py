@@ -58,6 +58,10 @@ def get_songs_by_artist(token, artist_id):
 
     return json_result[0]
 
-token = getToken()
+def get_genre(token, artist_id):
+    url = f"https://api.spotify.com/v1/artists/{artist_id}/genre?country=US"
+    headers = getHeader(token)
+    result = get(url, headers = headers)
+    json_result = json.loads(result.content)["artists"]["items"]
 
-searchArtists(token, 'ACDC')
+    return json_result[0]
