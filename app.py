@@ -13,9 +13,9 @@ def getValue():
     token = main.getToken()
     artist_id = main.searchArtists(token, artist)
     song = main.get_songs_by_artist(token, artist_id)
-    genre = main.get_genre(token, artist_id)
-    state = song + genre
-    return render_template('index.html', song = state)
+    similar_artists = main.get_genre(artist_id)
+    statement = "Your artist top song is {song}, and similar artists to your artist is {similar_artisits[0]}, {similar_artisits[1]}, and {similar_artisits[2]},"
+    return render_template('index.html', song = statement)
 
 if __name__ == '__main__':
     app.run(debug=True)

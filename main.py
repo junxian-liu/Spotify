@@ -1,6 +1,7 @@
 import config
 import os 
 import base64
+import pandas as pd
 from requests import post, get
 import json
 
@@ -58,10 +59,9 @@ def get_songs_by_artist(token, artist_id):
 
     return json_result[0]
 
-def get_genre(token, artist_id):
-    url = f"https://api.spotify.com/v1/artists/{artist_id}/genre?country=US"
-    headers = getHeader(token)
-    result = get(url, headers = headers)
-    json_result = json.loads(result.content)["artists"]["items"]
+def get_genre(artist):
+    data = pd.read_csv('artist-main-genre.csv')
+    genre = data.loc[data['artist'] == artist, 'genre'].values[0]
 
-    return json_result[0]
+    similar_artist = data.loc[data['genre'] == genre, 'artist'].tolist()
+    return similar_artist[0:3]
