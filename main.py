@@ -65,3 +65,8 @@ def get_genre(artist):
 
     similar_artist = data.loc[data['genre'] == genre, 'artist'].tolist()
     return similar_artist[0:3]
+
+def generate_spotify_link(artist):
+    link = f"https://open.spotify.com/{artist}"
+
+    return link
